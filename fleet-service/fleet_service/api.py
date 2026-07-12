@@ -29,6 +29,11 @@ def _zu_response(scooter: Scooter) -> ScooterResponse:
     )
 
 
+@app.get("/scooters", response_model=list[ScooterResponse])
+def list_scooters() -> list[ScooterResponse]:
+    return [_zu_response(scooter) for scooter in _scooters.values()]
+
+
 @app.get("/scooter/{id}", response_model=ScooterResponse)
 def get_scooter(id: str) -> ScooterResponse:
     scooter = _scooters.get(id)

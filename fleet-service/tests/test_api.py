@@ -14,6 +14,17 @@ def _reset_scooters():
     api._scooters.update(original)
 
 
+def test_list_scooters_liefert_alle_scooter():
+    response = client.get("/scooters")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert {s["id"] for s in body} == {"scooter-1", "scooter-2"}
+    ids_zu_status = {s["id"]: s["status"] for s in body}
+    assert ids_zu_status["scooter-1"] == "VERFUEGBAR"
+    assert ids_zu_status["scooter-2"] == "WARTUNG"
+
+
 def test_get_scooter_mit_akku_80_liefert_verfuegbar():
     response = client.get("/scooter/scooter-1")
 
