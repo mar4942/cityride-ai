@@ -2,6 +2,7 @@
 ## Zweck
 Verwaltet Scooter-Zustaende und Akku (Telematik).
 ## Öffentliche Schnittstelle
+GET /scooters -> [{id, akku, status, position}]
 GET /scooter/{id} -> {id, akku, status, position}
 POST /scooter/{id}/status {status} -> {id, status}
 ## Fachregeln
